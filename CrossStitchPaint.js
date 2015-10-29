@@ -1,10 +1,9 @@
-/* Setting the stitch variables */
+
+/* Setting the Global stitch variables */
 var stitchLength = 22;  //Actual length of the stitch
 var stitchThick = 6; //Thickness of the diagnal stitch
 
-//diagnal length of the square the stitch takes up
-var stitchDiag = stitchLength + stitchThick * 2 / Math.sqrt(2);
-//Length of the side (side === width === height) of the whole square the stitch takes up
+//Length of the side of the whole square the stitch takes up
 var stitchSide = stitchLength / Math.sqrt(2) + stitchThick;
 
 /*Setting up the base cloth grid that cannot be erased ever*/
@@ -16,6 +15,7 @@ base.fillStyle = '#F5F6CE';
 base.fillRect(0, 0, canvasBase.width, canvasBase.height);
 
 /*Setting line width and color*/
+//an equation to make the line width the same as cross part of the cross stitch
 base.lineWidth = Math.sqrt(2) * stitchThick;
 base.strokeStyle = '#BDBDBD';
 
@@ -41,13 +41,12 @@ function drawAida(){
 
 drawAida();
 
+/*********************Start of Cross Stitch Canvas*****************************/
+
 /*The canvas where the crossStitches go */
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
-/*Where the outline stitches go*/
-var canvasOutline = document.getElementById('outline');
-var outline = canvasOutline.getContext('2d');
 
 /*Setting the line width for the outline of the stitches*/
 ctx.lineWidth = 1;
@@ -96,3 +95,7 @@ function leftCrossStitch(x, y, width, height, color){
     drawDiagnalStitch(x, y, width, height, 1/4, color);
     drawDiagnalStitch(x, y, width, height, 3/4, color);
 }
+/*******************************Start of Outline Canvas************************/
+/*Where the outline stitches go*/
+var canvasOutline = document.getElementById('outline');
+var outline = canvasOutline.getContext('2d');
