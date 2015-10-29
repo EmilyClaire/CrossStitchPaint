@@ -64,6 +64,7 @@ for(var i = 0; i < 19; i++){
     leftCrossStitch(47, 60 + i * 20, 6, 20, 'orange');
 }
 */
+
 /*Draws one diagnal stitch*/
 function drawDiagnalStitch(x,y,width,height,rad, color){
 
