@@ -78,19 +78,19 @@ function onMouseMove(event){
 
 //Checks to see if the mouse is in the bounds
 function boundsCheck(x, y){
-    if(event.pageX < 2 * stitchSide){
+    if(x < 2 * stitchSide){
       return false;
     }
 
-    if(event.pageX > canvasBase.width - 2 * stitchSide){
+    if(x > canvasBase.width - 2 * stitchSide){
       return false;
     }
 
-    if(event.pageY < 2 * stitchSide){
+    if(y < 2 * stitchSide){
       return false;
     }
 
-    if(event.pageY > canvasBase.height - 2 * stitchSide){
+    if(y > canvasBase.height - 2 * stitchSide){
       return false;
     }
 
