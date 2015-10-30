@@ -48,36 +48,38 @@ var outline = canvasOutline.getContext('2d');
 //The canvas where the crossStitches go
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
-var pos = {
-  x: 0,
-  y:0
-};
+var mouseDown = false;
 
-canvas.addEventListener("mousedown", doMouseDown, false);
+canvas.addEventListener("mousedown", onMouseDown, false);
+canvas.addEventListener("mousemove", onMouseMove, false);
+canvas.addEventListener("mouseup", onMouseUp, false);
 
-function doMouseDown(event){
-  pos.x = event.pageX;
-  pos.y = event.pageY;
-
-  rightCrossStitch(Math.round(pos.x/stitchSide) * stitchSide,  Math.round(pos.y/stitchSide) * stitchSide, stitchThick, stitchLength, 'red');
+//prints an x where you clicked.
+function onMouseDown(event){
+  printStitch(event.pageX, event.pageY);
+  mouseDown = true;
 }
 
+//makes it so that mouseDown is false
+function onMouseUp(event){
+  mouseDown = false;
+}
+
+//Prints an x as long as the mouse is moving and held down
+function onMouseMove(event){
+  if(mouseDown){
+    printStitch(event.pageX, event.pageY);
+  }
+}
+
+//Prints a red cross stitch to the closest overlap point on the grid
+function printStitch(x, y){
+  rightCrossStitch(Math.round(x/stitchSide) * stitchSide,
+  Math.round(y/stitchSide) * stitchSide, stitchThick, stitchLength, 'red');
+}
 
 //Setting the line width for the outline of the stitches
 ctx.lineWidth = 1;
-
-/*drawing 19 stiches*/
-/*for(var i = 0; i < 19; i++){
-
-    rightCrossStitch(2 * stitchSide + i * stitchSide,  2 * stitchSide, stitchThick, stitchLength, 'red');
-    leftCrossStitch(2 * stitchSide,  3 * stitchSide + stitchSide * i, stitchThick, stitchLength, 'blue');
-}
-
-for(var i = 0; i < 19; i++){
-    rightCrossStitch(27 + i * 20, 40, 6, 20, 'green');
-    leftCrossStitch(47, 60 + i * 20, 6, 20, 'orange');
-}
-*/
 
 //Draws one diagnal stitch
 function drawDiagnalStitch(x,y,width,height,rad, color){
