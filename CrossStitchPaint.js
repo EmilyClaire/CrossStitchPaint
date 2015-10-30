@@ -56,7 +56,9 @@ canvas.addEventListener("mouseup", onMouseUp, false);
 
 //prints an x where you clicked.
 function onMouseDown(event){
-  printStitch(event.pageX, event.pageY);
+  if(boundsCheck(event.pageX, event.pageY)){
+    printStitch(event.pageX, event.pageY);
+  }
   mouseDown = true;
 }
 
@@ -68,8 +70,31 @@ function onMouseUp(event){
 //Prints an x as long as the mouse is moving and held down
 function onMouseMove(event){
   if(mouseDown){
-    printStitch(event.pageX, event.pageY);
+      if(boundsCheck(event.pageX, event.pageY)){
+      printStitch(event.pageX, event.pageY);
+    }
   }
+}
+
+//Checks to see if the mouse is in the bounds
+function boundsCheck(x, y){
+    if(event.pageX < 2 * stitchSide){
+      return false;
+    }
+
+    if(event.pageX > canvasBase.width - 2 * stitchSide){
+      return false;
+    }
+
+    if(event.pageY < 2 * stitchSide){
+      return false;
+    }
+
+    if(event.pageY > canvasBase.height - 2 * stitchSide){
+      return false;
+    }
+
+    return true;
 }
 
 //Prints a red cross stitch to the closest overlap point on the grid
